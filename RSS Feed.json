@@ -1,0 +1,207 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        0
+      ],
+      "id": "cb9e67aa-793a-4df4-ac75-26b8aba9c6d7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "htciyEhtWoxIVpY8",
+          "mode": "list",
+          "cachedResultName": "mydatatable",
+          "cachedResultUrl": "/projects/RCgxDaTtfoh6FI9K/datatables/htciyEhtWoxIVpY8"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $json.pubDate }}",
+            "News": "={{ $json['content:encodedSnippet'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "News",
+              "displayName": "News",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        0
+      ],
+      "id": "1c843417-d54f-4539-96d8-0ff93dd5f811",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "url": "https://www.techtalkthai.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -448,
+        0
+      ],
+      "id": "60956872-4e2d-41a5-8757-ef0be0e1a27e",
+      "name": "Tech-IT-News"
+    },
+    {
+      "parameters": {
+        "url": "https://droidsans.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -448,
+        176
+      ],
+      "id": "fa1cc584-a6cb-4dbb-b8a7-4b1cc029bca3",
+      "name": "droidsans"
+    },
+    {
+      "parameters": {
+        "url": "https://www.srtet.co.th/rss/news",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -448,
+        352
+      ],
+      "id": "3430d1ef-2502-4c4c-8ee3-87dc28f01ef8",
+      "name": "srtet"
+    },
+    {
+      "parameters": {
+        "url": "https://www.nso.go.th/nsoweb/main/rssfeed/get_data/A",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -448,
+        528
+      ],
+      "id": "0110f29d-7dde-4e53-963b-dba9da777d32",
+      "name": "nso"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Tech-IT-News",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "droidsans",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "srtet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "nso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tech-IT-News": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "droidsans": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "srtet": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "nso": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "67a08caa-8b3b-4904-80d2-d8f7b6a53930",
+  "meta": {
+    "instanceId": "7cd8480d19e840089d57567252c065e6133d39333aa29897397f1b9b477a635a"
+  },
+  "id": "VYILY9pvf53ICgYe",
+  "tags": []
+}
